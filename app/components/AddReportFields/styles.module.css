@@ -1,0 +1,21 @@
+.selectContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.formSelect {
+  padding-right: 30px; /* adjust as needed */
+}
+
+.iconContainer {
+  position: absolute;
+  right: 17px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.selectIcon {
+  /* add any additional styles for the icon here */
+}

@@ -1,0 +1,10 @@
+.button1 {
+  border-radius: 8px;
+  background: #2e5d7d;
+  color: var(--White, #fff);
+}
+
+.button_notActive {
+  border-radius: 8px;
+  border: 1px solid #c5c5c5;
+}

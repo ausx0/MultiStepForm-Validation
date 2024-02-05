@@ -1,0 +1,93 @@
+import React from "react";
+import PolygonIcon from "@/app/components/assets/PolygonIcon";
+
+import { Controller } from "react-hook-form";
+import { SelectField } from "@/app/components/AddReportFields/SelectField";
+import { RadioInput } from "@/app/components/AddReportFields/RadioField";
+import FemaleIcon from "@/app/components/assets/FemaleIcon";
+import MaleIcon from "@/app/components/assets/MaleIcon";
+
+const DemographicForm = ({ control, errors }) => {
+  return (
+    <>
+      <div className="d-flex w-100 justify-content-between align-items-center">
+        <span style={{ color: "#09131973" }}>
+          In here you can select details
+        </span>
+        <h5 style={{ fontWeight: "bold", color: "#2E5D7D" }}>Demographic</h5>
+      </div>
+
+      <div className="d-flex w-100 justify-content-center">
+        <div className="w-50 d-flex flex-column gap-4">
+          <div className="d-flex flex-column">
+            <label className="form-label">Material Status</label>
+            <Controller
+              name="Demographics.MaterialStatus"
+              control={control}
+              render={({ field }) => (
+                <SelectField
+                  {...field}
+                  error={errors}
+                  options={["Option 1", "Option 2", "Option 3"]}
+                />
+              )}
+            />
+          </div>
+          <div className="d-flex flex-column">
+            <label className="form-label">Province</label>
+            <Controller
+              name="Demographics.Province"
+              control={control}
+              render={({ field }) => (
+                <SelectField
+                  {...field}
+                  error={errors}
+                  options={["Option 1", "Option 2", "Option 3"]}
+                />
+              )}
+            />
+          </div>
+          <div className="d-flex flex-column ">
+            <RadioInput
+              label="Select Gender"
+              errors={errors}
+              control={control}
+              name="Demographics.SelectGender"
+              options={[
+                { label: "Male", value: "male", icon: <MaleIcon /> },
+                {
+                  label: "Female",
+                  value: "female",
+                  icon: <FemaleIcon color="red" />,
+                },
+                { label: "Unknown", value: "unknown" },
+
+                // Add more options here
+              ]}
+            />
+          </div>
+          <div className="d-flex flex-column ">
+            <RadioInput
+              label="Have Children"
+              control={control}
+              errors={errors}
+              name="Demographics.HaveChildren"
+              options={[
+                { label: "Yes", value: "yes" },
+                {
+                  label: "No",
+                  value: "no",
+                },
+                { label: "Unknown", value: "unknown" },
+
+                // Add more options here
+              ]}
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default DemographicForm;

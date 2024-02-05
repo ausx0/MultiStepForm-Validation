@@ -1,95 +1,135 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import React from "react";
+import Table from "./components/Table";
+import SearchInput from "./components/ui/SearchInput";
+import StyledButton from "./components/ui/Button";
+import {
+  faPlusCircle,
+  faTrash,
+  faTrashAlt,
+  faTrashCan,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PlusInCircleIcon from "./components/assets/PlusInCircleIcon";
+import CirclePlusIcon from "./components/assets/PlusInCircleIcon";
+import DeleteAction from "./components/DeleteAction";
+import AddReportModal from "./components/AddReportModal";
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+const columns = [
+  {
+    key: "id",
+    title: "ID",
+    width: 10,
+  },
+  {
+    key: "reportName",
+    title: "Report Name",
+    width: 200,
+  },
+  {
+    key: "typeOfReport",
+    title: "Type Of Report",
+    width: 200,
+    render: (_, { typeOfReport }) =>
+      typeOfReport === "Financial" ? (
+        <span style={{ color: "#FFC107" }}>{typeOfReport}</span>
+      ) : (
+        <span style={{ color: "#2E5D7D" }}>{typeOfReport}</span>
+      ),
+  },
+  {
+    key: "pages",
+    title: "Pages",
+    width: 50,
+  },
+  {
+    // key: "tags",
+    title: "Actions",
+    width: 300,
+    render: () => (
+      <>
+        <div className="d-flex justify-content-center align-items-center gap-4">
+          <StyledButton
+            style={{
+              background: "#7493A8",
+              color: "#fff",
+              border: "none",
+            }}
+            variant={"actions"}
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+            View
+          </StyledButton>
+
+          <StyledButton
+            style={{
+              background: "#E0BB1F",
+              color: "#fff",
+              border: "none",
+            }}
+            variant={"actions"}
+          >
+            Export
+          </StyledButton>
+          <DeleteAction />
+        </div>
+      </>
+    ),
+  },
+];
+
+const data = [
+  {
+    id: 1,
+    reportName: "Francisco Mendes",
+    typeOfReport: "Financial",
+    pages: 12,
+    tags: ["designer", "photographer"],
+  },
+  {
+    id: 2,
+    reportName: "Ricardo Malva",
+    typeOfReport: "Patient",
+    pages: 12,
+    tags: ["designer", "photographer"],
+  },
+  {
+    id: 3,
+    reportName: "Francisco Mendes",
+    typeOfReport: "Financial",
+    pages: 12,
+    tags: ["designer", "photographer"],
+  },
+  {
+    id: 4,
+    reportName: "Ricardo Malva",
+    typeOfReport: "Patient",
+    pages: 12,
+    tags: ["designer", "photographer"],
+  },
+];
+
+const Home = () => {
+  return (
+    <>
+      <div className="d-flex justify-content-between">
+        <div>
+          <h4 className="d-flex align-items-center gap-2">
+            Reports<span className="fw-bold fs-2"> 122</span>
+          </h4>
+        </div>
+        <div className="d-flex justify-content-center align-items-center">
+          <SearchInput placeholder={"Search for reports..."} />
+          <StyledButton style={{ marginLeft: "10px" }}>Search</StyledButton>
+          <div>
+            <AddReportModal />
+          </div>
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="m-4">
+        <Table data={data} columns={columns} />
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </>
   );
-}
+};
+
+export default Home;
