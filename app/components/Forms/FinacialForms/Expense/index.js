@@ -8,7 +8,7 @@ import TimeRangeField from "@/app/components/AddReportFields/TimeRangeField";
 import SwitchField from "@/app/components/AddReportFields/SwitchField";
 
 const ExpenseForm = ({ control, errors, watch }) => {
-  const allTime = watch("Expense.AllTime");
+  const all_time = watch("expense.all_time");
 
   return (
     <>
@@ -16,7 +16,7 @@ const ExpenseForm = ({ control, errors, watch }) => {
         <span style={{ color: "#09131973" }}>
           In here you can select details
         </span>
-        <h5 style={{ fontWeight: "bold", color: "#2E5D7D" }}>Expense</h5>
+        <h5 style={{ fontWeight: "bold", color: "#2E5D7D" }}>expense</h5>
       </div>
 
       <div className="d-flex w-100 justify-content-center">
@@ -24,7 +24,7 @@ const ExpenseForm = ({ control, errors, watch }) => {
           <div className="d-flex flex-column">
             <label className="form-label">Select Items</label>
             <Controller
-              name="Expense.Select"
+              name="expense.Select"
               control={control}
               render={({ field }) => (
                 <SelectField
@@ -38,30 +38,30 @@ const ExpenseForm = ({ control, errors, watch }) => {
           <div className="d-flex flex-column">
             <DateRangeInput
               control={control}
-              name="Expense.Date"
+              name="expense.Date"
               errors={
-                errors.Expense && errors.Expense.Date ? errors.Expense.Date : {}
+                errors.expense && errors.expense.Date ? errors.expense.Date : {}
               }
               label={"Date Range Selection"}
             />
           </div>
           <div className="d-flex flex-column">
-            {!allTime && (
+            {!all_time && (
               <TimeRangeField
                 control={control}
-                name="Expense.Time"
+                name="expense.Time"
                 errors={
-                  errors.Expense && errors.Expense.Time
-                    ? errors.Expense.Time
+                  errors.expense && errors.expense.Time
+                    ? errors.expense.Time
                     : {}
                 }
                 label={"Time Range Selection"}
-                disabled={allTime}
+                disabled={all_time}
               />
             )}
             <SwitchField
               control={control}
-              name="Expense.AllTime"
+              name="expense.all_time"
               label="All the time"
             />
           </div>

@@ -7,7 +7,7 @@ const TimeRangeField = ({ control, label, name, errors, disabled }) => (
     <label className="form-label">{label}</label>
     <div className="d-flex input-group">
       <Controller
-        name={`${name}.startTime`}
+        name={`${name}.start_time`}
         control={control}
         defaultValue=""
         render={({ field }) => (
@@ -24,7 +24,7 @@ const TimeRangeField = ({ control, label, name, errors, disabled }) => (
         <ArrowRightIcon />
       </span>
       <Controller
-        name={`${name}.endTime`}
+        name={`${name}.end_time`}
         control={control}
         defaultValue=""
         render={({ field }) => (
@@ -38,11 +38,11 @@ const TimeRangeField = ({ control, label, name, errors, disabled }) => (
         )}
       />
     </div>
-    {errors && errors.startTime && (
-      <p style={{ color: "red" }}>{errors.startTime.message}</p>
+    {errors && errors.start_time && (
+      <p style={{ color: "red" }}>{errors.start_time.message}</p>
     )}
-    {errors && errors.endTime && (
-      <p style={{ color: "red" }}>{errors.endTime.message}</p>
+    {errors && errors.end_time && (
+      <p style={{ color: "red" }}>{errors.end_time.message}</p>
     )}
   </div>
 );

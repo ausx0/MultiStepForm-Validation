@@ -7,8 +7,8 @@ import DateRangeInput from "@/app/components/AddReportFields/DateRangeField";
 import TimeRangeField from "@/app/components/AddReportFields/TimeRangeField";
 import SwitchField from "@/app/components/AddReportFields/SwitchField";
 
-const LTRForm = ({ control, errors, watch }) => {
-  const allTime = watch("LTR.AllTime");
+const LtrForm = ({ control, errors, watch }) => {
+  const all_time = watch("ltr.all_time");
 
   return (
     <>
@@ -26,24 +26,24 @@ const LTRForm = ({ control, errors, watch }) => {
           <div className="d-flex flex-column">
             <DateRangeInput
               control={control}
-              name="LTR.Date"
-              errors={errors.LTR && errors.LTR.Date ? errors.LTR.Date : {}}
+              name="ltr.Date"
+              errors={errors.ltr && errors.ltr.Date ? errors.ltr.Date : {}}
               label={"Date Range Selection"}
             />
           </div>
           <div className="d-flex flex-column">
-            {!allTime && (
+            {!all_time && (
               <TimeRangeField
                 control={control}
-                name="LTR.Time"
-                errors={errors.LTR && errors.LTR.Time ? errors.LTR.Time : {}}
+                name="ltr.Time"
+                errors={errors.ltr && errors.ltr.Time ? errors.ltr.Time : {}}
                 label={"Time Range Selection"}
-                disabled={allTime}
+                disabled={all_time}
               />
             )}
             <SwitchField
               control={control}
-              name="LTR.AllTime"
+              name="ltr.all_time"
               label="All the time"
             />
           </div>
@@ -53,4 +53,4 @@ const LTRForm = ({ control, errors, watch }) => {
   );
 };
 
-export default LTRForm;
+export default LtrForm;

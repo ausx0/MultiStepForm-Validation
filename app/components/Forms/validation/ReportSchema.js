@@ -3,82 +3,82 @@ import * as z from "zod";
 // Date schema
 const DateSchema = z
   .object({
-    startDate: z
+    start_date: z
       .string()
       .refine(
         (value) => new Date(value) >= new Date(),
         "Start date should be now or in the future"
       ),
-    endDate: z
+    end_date: z
       .string()
       .refine(
         (value) => new Date(value) >= new Date(),
         "End date should be now or in the future"
       ),
   })
-  .refine((data) => new Date(data.endDate) >= new Date(data.startDate), {
+  .refine((data) => new Date(data.end_date) >= new Date(data.start_date), {
     message: "End date should be after start date",
-    path: ["endDate"],
+    path: ["end_date"],
   });
 
 // Time schema
 const TimeSchema = z
   .object({
-    startTime: z.string().min(1, "Start time is required"),
-    endTime: z.string().min(1, "End time is required"),
+    start_time: z.string().min(1, "Start time is required"),
+    end_time: z.string().min(1, "End time is required"),
   })
   .refine(
     (data) =>
-      new Date(`1970-01-01T${data.endTime}`) >=
-      new Date(`1970-01-01T${data.startTime}`),
+      new Date(`1970-01-01T${data.end_time}`) >=
+      new Date(`1970-01-01T${data.start_time}`),
     {
       message: "End time should be after start time",
-      path: ["endTime"],
+      path: ["end_time"],
     }
   );
 
 // Step 1
 export const Step1Schema = z.object({
-  NameOfReport: z.string().min(2),
-  ReportType: z.string().min(2, { message: "must choose" }),
-  ReportInclude: z.string().min(2, { message: "must choose" }),
+  report_name: z.string().min(2),
+  report_type: z.string().min(2, { message: "must choose" }),
+  report_include: z.string().min(2, { message: "must choose" }),
 });
 
 // Step 2
 
-// Demographics schema
-export const DemographicsSchema = z.object({
-  Demographics: z.object({
-    MaterialStatus: z.string().min(2, { message: "must choose" }),
-    Province: z.string().min(2, { message: "must choose" }),
-    SelectGender: z.string().min(2, { message: "must choose" }),
-    HaveChildren: z.string().min(2, { message: "must choose" }),
+// demographics schema
+export const demographicsSchema = z.object({
+  demographics: z.object({
+    material_status: z.string().min(2, { message: "must choose" }),
+    province: z.string().min(2, { message: "must choose" }),
+    select_gender: z.string().min(2, { message: "must choose" }),
+    have_children: z.string().min(2, { message: "must choose" }),
   }),
 });
 
-// Diagnosis schema
-export const DiagnosisSchema = z.object({
-  Diagnosis: z
+// diagnosis schema
+export const diagnosisSchema = z.object({
+  diagnosis: z
     .object({
       Date: DateSchema,
       Time: z.object({
-        startTime: z.string().default(() => "00:00"),
-        endTime: z.string().default(() => "00:00"),
+        start_time: z.string().default(() => "00:00"),
+        end_time: z.string().default(() => "00:00"),
       }),
-      AllTime: z.boolean(),
+      all_time: z.boolean(),
     })
     .refine((data) => {
-      if (data.AllTime) {
-        data.Time.startTime = "";
-        data.Time.endTime = "";
+      if (data.all_time) {
+        data.Time.start_time = "";
+        data.Time.end_time = "";
         return true;
-      } else if (!data.AllTime) {
+      } else if (!data.all_time) {
         const timeValidation = TimeSchema.safeParse(data.Time);
         if (!timeValidation.success) {
           throw new z.ZodError(
             timeValidation.error.errors.map((err) => ({
               message: err.message,
-              path: ["Diagnosis", "Time", ...err.path],
+              path: ["diagnosis", "Time", ...err.path],
             }))
           );
         }
@@ -89,28 +89,28 @@ export const DiagnosisSchema = z.object({
 
 // Treatment and Procedure schema
 export const TreatmentAndProcedureSchema = z.object({
-  TAP: z
+  tab: z
     .object({
-      RadioButton: z.string().min(2, { message: "must choose" }),
+      radio_button: z.string().min(2, { message: "must choose" }),
       Date: DateSchema,
       Time: z.object({
-        startTime: z.string().default(() => "00:00"),
-        endTime: z.string().default(() => "00:00"),
+        start_time: z.string().default(() => "00:00"),
+        end_time: z.string().default(() => "00:00"),
       }),
-      AllTime: z.boolean(),
+      all_time: z.boolean(),
     })
     .refine((data) => {
-      if (data.AllTime) {
-        data.Time.startTime = "";
-        data.Time.endTime = "";
+      if (data.all_time) {
+        data.Time.start_time = "";
+        data.Time.end_time = "";
         return true;
-      } else if (!data.AllTime) {
+      } else if (!data.all_time) {
         const timeValidation = TimeSchema.safeParse(data.Time);
         if (!timeValidation.success) {
           throw new z.ZodError(
             timeValidation.error.errors.map((err) => ({
               message: err.message,
-              path: ["TAP", "Time", ...err.path],
+              path: ["tab", "Time", ...err.path],
             }))
           );
         }
@@ -120,27 +120,27 @@ export const TreatmentAndProcedureSchema = z.object({
 });
 
 export const LaboratoryTestResultsSchema = z.object({
-  LTR: z
+  ltr: z
     .object({
       Date: DateSchema,
       Time: z.object({
-        startTime: z.string().default(() => "00:00"),
-        endTime: z.string().default(() => "00:00"),
+        start_time: z.string().default(() => "00:00"),
+        end_time: z.string().default(() => "00:00"),
       }),
-      AllTime: z.boolean(),
+      all_time: z.boolean(),
     })
     .refine((data) => {
-      if (data.AllTime) {
-        data.Time.startTime = "";
-        data.Time.endTime = "";
+      if (data.all_time) {
+        data.Time.start_time = "";
+        data.Time.end_time = "";
         return true;
-      } else if (!data.AllTime) {
+      } else if (!data.all_time) {
         const timeValidation = TimeSchema.safeParse(data.Time);
         if (!timeValidation.success) {
           throw new z.ZodError(
             timeValidation.error.errors.map((err) => ({
               message: err.message,
-              path: ["LTR", "Time", ...err.path],
+              path: ["ltr", "Time", ...err.path],
             }))
           );
         }
@@ -149,29 +149,29 @@ export const LaboratoryTestResultsSchema = z.object({
     }),
 });
 
-export const AllergySchema = z.object({
-  Allergy: z
+export const allergySchema = z.object({
+  allergy: z
     .object({
       Select: z.string().min(2, { message: "must choose" }),
       Date: DateSchema,
       Time: z.object({
-        startTime: z.string().default(() => "00:00"),
-        endTime: z.string().default(() => "00:00"),
+        start_time: z.string().default(() => "00:00"),
+        end_time: z.string().default(() => "00:00"),
       }),
-      AllTime: z.boolean(),
+      all_time: z.boolean(),
     })
     .refine((data) => {
-      if (data.AllTime) {
-        data.Time.startTime = "";
-        data.Time.endTime = "";
+      if (data.all_time) {
+        data.Time.start_time = "";
+        data.Time.end_time = "";
         return true;
-      } else if (!data.AllTime) {
+      } else if (!data.all_time) {
         const timeValidation = TimeSchema.safeParse(data.Time);
         if (!timeValidation.success) {
           throw new z.ZodError(
             timeValidation.error.errors.map((err) => ({
               message: err.message,
-              path: ["Allergy", "Time", ...err.path],
+              path: ["allergy", "Time", ...err.path],
             }))
           );
         }
@@ -180,28 +180,28 @@ export const AllergySchema = z.object({
     }),
 });
 
-export const RadiologySchema = z.object({
-  Radiology: z
+export const radiologySchema = z.object({
+  radiology: z
     .object({
       Date: DateSchema,
       Time: z.object({
-        startTime: z.string().default(() => "00:00"),
-        endTime: z.string().default(() => "00:00"),
+        start_time: z.string().default(() => "00:00"),
+        end_time: z.string().default(() => "00:00"),
       }),
-      AllTime: z.boolean(),
+      all_time: z.boolean(),
     })
     .refine((data) => {
-      if (data.AllTime) {
-        data.Time.startTime = "";
-        data.Time.endTime = "";
+      if (data.all_time) {
+        data.Time.start_time = "";
+        data.Time.end_time = "";
         return true;
-      } else if (!data.AllTime) {
+      } else if (!data.all_time) {
         const timeValidation = TimeSchema.safeParse(data.Time);
         if (!timeValidation.success) {
           throw new z.ZodError(
             timeValidation.error.errors.map((err) => ({
               message: err.message,
-              path: ["Radiology", "Time", ...err.path],
+              path: ["radiology", "Time", ...err.path],
             }))
           );
         }
@@ -211,27 +211,27 @@ export const RadiologySchema = z.object({
 });
 
 export const PatientVisitSummarySchema = z.object({
-  PVS: z
+  pvs: z
     .object({
       Date: DateSchema,
       Time: z.object({
-        startTime: z.string().default(() => "00:00"),
-        endTime: z.string().default(() => "00:00"),
+        start_time: z.string().default(() => "00:00"),
+        end_time: z.string().default(() => "00:00"),
       }),
-      AllTime: z.boolean(),
+      all_time: z.boolean(),
     })
     .refine((data) => {
-      if (data.AllTime) {
-        data.Time.startTime = "";
-        data.Time.endTime = "";
+      if (data.all_time) {
+        data.Time.start_time = "";
+        data.Time.end_time = "";
         return true;
-      } else if (!data.AllTime) {
+      } else if (!data.all_time) {
         const timeValidation = TimeSchema.safeParse(data.Time);
         if (!timeValidation.success) {
           throw new z.ZodError(
             timeValidation.error.errors.map((err) => ({
               message: err.message,
-              path: ["PVS", "Time", ...err.path],
+              path: ["pvs", "Time", ...err.path],
             }))
           );
         }
@@ -242,31 +242,31 @@ export const PatientVisitSummarySchema = z.object({
 
 //Finacial Step
 
-export const RevenueSchema = z.object({
-  Revenue: z
+export const revenueSchema = z.object({
+  revenue: z
     .object({
-      Patient: z.string().min(2, { message: "must choose" }),
-      Province: z.string().min(2, { message: "must choose" }),
-      SelectGender: z.string().min(2, { message: "must choose" }),
+      patient: z.string().min(2, { message: "must choose" }),
+      province: z.string().min(2, { message: "must choose" }),
+      select_gender: z.string().min(2, { message: "must choose" }),
       Date: DateSchema,
       Time: z.object({
-        startTime: z.string().default(() => "00:00"),
-        endTime: z.string().default(() => "00:00"),
+        start_time: z.string().default(() => "00:00"),
+        end_time: z.string().default(() => "00:00"),
       }),
-      AllTime: z.boolean(),
+      all_time: z.boolean(),
     })
     .refine((data) => {
-      if (data.AllTime) {
-        data.Time.startTime = "";
-        data.Time.endTime = "";
+      if (data.all_time) {
+        data.Time.start_time = "";
+        data.Time.end_time = "";
         return true;
-      } else if (!data.AllTime) {
+      } else if (!data.all_time) {
         const timeValidation = TimeSchema.safeParse(data.Time);
         if (!timeValidation.success) {
           throw new z.ZodError(
             timeValidation.error.errors.map((err) => ({
               message: err.message,
-              path: ["Revenue", "Time", ...err.path],
+              path: ["revenue", "Time", ...err.path],
             }))
           );
         }
@@ -275,29 +275,29 @@ export const RevenueSchema = z.object({
     }),
 });
 
-export const ExpenseSchema = z.object({
-  Expense: z
+export const expenseSchema = z.object({
+  expense: z
     .object({
       Select: z.string().min(2, { message: "must choose" }),
       Date: DateSchema,
       Time: z.object({
-        startTime: z.string().default(() => "00:00"),
-        endTime: z.string().default(() => "00:00"),
+        start_time: z.string().default(() => "00:00"),
+        end_time: z.string().default(() => "00:00"),
       }),
-      AllTime: z.boolean(),
+      all_time: z.boolean(),
     })
     .refine((data) => {
-      if (data.AllTime) {
-        data.Time.startTime = "";
-        data.Time.endTime = "";
+      if (data.all_time) {
+        data.Time.start_time = "";
+        data.Time.end_time = "";
         return true;
-      } else if (!data.AllTime) {
+      } else if (!data.all_time) {
         const timeValidation = TimeSchema.safeParse(data.Time);
         if (!timeValidation.success) {
           throw new z.ZodError(
             timeValidation.error.errors.map((err) => ({
               message: err.message,
-              path: ["Expense", "Time", ...err.path],
+              path: ["expense", "Time", ...err.path],
             }))
           );
         }
@@ -307,27 +307,27 @@ export const ExpenseSchema = z.object({
 });
 
 export const ProfitAndLossStatementSchema = z.object({
-  PALS: z
+  pals: z
     .object({
       Date: DateSchema,
       Time: z.object({
-        startTime: z.string().default(() => "00:00"),
-        endTime: z.string().default(() => "00:00"),
+        start_time: z.string().default(() => "00:00"),
+        end_time: z.string().default(() => "00:00"),
       }),
-      AllTime: z.boolean(),
+      all_time: z.boolean(),
     })
     .refine((data) => {
-      if (data.AllTime) {
-        data.Time.startTime = "";
-        data.Time.endTime = "";
+      if (data.all_time) {
+        data.Time.start_time = "";
+        data.Time.end_time = "";
         return true;
-      } else if (!data.AllTime) {
+      } else if (!data.all_time) {
         const timeValidation = TimeSchema.safeParse(data.Time);
         if (!timeValidation.success) {
           throw new z.ZodError(
             timeValidation.error.errors.map((err) => ({
               message: err.message,
-              path: ["PALS", "Time", ...err.path],
+              path: ["pals", "Time", ...err.path],
             }))
           );
         }
@@ -336,30 +336,30 @@ export const ProfitAndLossStatementSchema = z.object({
     }),
 });
 
-export const CostAnalysisSchema = z.object({
-  CostAnalysis: z
+export const cost_analysisSchema = z.object({
+  cost_analysis: z
     .object({
-      Persons: z.string().min(2, { message: "must choose" }),
-      Items: z.string().min(2, { message: "must choose" }),
+      persons: z.string().min(2, { message: "must choose" }),
+      items: z.string().min(2, { message: "must choose" }),
       Date: DateSchema,
       Time: z.object({
-        startTime: z.string().default(() => "00:00"),
-        endTime: z.string().default(() => "00:00"),
+        start_time: z.string().default(() => "00:00"),
+        end_time: z.string().default(() => "00:00"),
       }),
-      AllTime: z.boolean(),
+      all_time: z.boolean(),
     })
     .refine((data) => {
-      if (data.AllTime) {
-        data.Time.startTime = "";
-        data.Time.endTime = "";
+      if (data.all_time) {
+        data.Time.start_time = "";
+        data.Time.end_time = "";
         return true;
-      } else if (!data.AllTime) {
+      } else if (!data.all_time) {
         const timeValidation = TimeSchema.safeParse(data.Time);
         if (!timeValidation.success) {
           throw new z.ZodError(
             timeValidation.error.errors.map((err) => ({
               message: err.message,
-              path: ["CostAnalysis", "Time", ...err.path],
+              path: ["cost_analysis", "Time", ...err.path],
             }))
           );
         }
@@ -368,29 +368,29 @@ export const CostAnalysisSchema = z.object({
     }),
 });
 
-export const UtilizationSchema = z.object({
-  Utilization: z
+export const utilizationSchema = z.object({
+  utilization: z
     .object({
-      Items: z.string().min(2, { message: "must choose" }),
+      items: z.string().min(2, { message: "must choose" }),
       Date: DateSchema,
       Time: z.object({
-        startTime: z.string().default(() => "00:00"),
-        endTime: z.string().default(() => "00:00"),
+        start_time: z.string().default(() => "00:00"),
+        end_time: z.string().default(() => "00:00"),
       }),
-      AllTime: z.boolean(),
+      all_time: z.boolean(),
     })
     .refine((data) => {
-      if (data.AllTime) {
-        data.Time.startTime = "";
-        data.Time.endTime = "";
+      if (data.all_time) {
+        data.Time.start_time = "";
+        data.Time.end_time = "";
         return true;
-      } else if (!data.AllTime) {
+      } else if (!data.all_time) {
         const timeValidation = TimeSchema.safeParse(data.Time);
         if (!timeValidation.success) {
           throw new z.ZodError(
             timeValidation.error.errors.map((err) => ({
               message: err.message,
-              path: ["Utilization", "Time", ...err.path],
+              path: ["utilization", "Time", ...err.path],
             }))
           );
         }

@@ -8,7 +8,7 @@ import TimeRangeField from "@/app/components/AddReportFields/TimeRangeField";
 import SwitchField from "@/app/components/AddReportFields/SwitchField";
 
 const ProfitAndLossStatementForm = ({ control, errors, watch }) => {
-  const allTime = watch("PALS.AllTime");
+  const all_time = watch("pals.all_time");
 
   return (
     <>
@@ -26,24 +26,24 @@ const ProfitAndLossStatementForm = ({ control, errors, watch }) => {
           <div className="d-flex flex-column">
             <DateRangeInput
               control={control}
-              name="PALS.Date"
-              errors={errors.PALS && errors.PALS.Date ? errors.PALS.Date : {}}
+              name="pals.Date"
+              errors={errors.pals && errors.pals.Date ? errors.pals.Date : {}}
               label={"Date Range Selection"}
             />
           </div>
           <div className="d-flex flex-column">
-            {!allTime && (
+            {!all_time && (
               <TimeRangeField
                 control={control}
-                name="PALS.Time"
-                errors={errors.PALS && errors.PALS.Time ? errors.PALS.Time : {}}
+                name="pals.Time"
+                errors={errors.pals && errors.pals.Time ? errors.pals.Time : {}}
                 label={"Time Range Selection"}
-                disabled={allTime}
+                disabled={all_time}
               />
             )}
             <SwitchField
               control={control}
-              name="PALS.AllTime"
+              name="pals.all_time"
               label="All the time"
             />
           </div>

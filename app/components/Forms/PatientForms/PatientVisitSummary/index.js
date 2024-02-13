@@ -8,7 +8,7 @@ import TimeRangeField from "@/app/components/AddReportFields/TimeRangeField";
 import SwitchField from "@/app/components/AddReportFields/SwitchField";
 
 const PatientVisitSummaryForm = ({ control, errors, watch }) => {
-  const allTime = watch("PVS.AllTime");
+  const all_time = watch("pvs.all_time");
 
   return (
     <>
@@ -26,24 +26,24 @@ const PatientVisitSummaryForm = ({ control, errors, watch }) => {
           <div className="d-flex flex-column">
             <DateRangeInput
               control={control}
-              name="PVS.Date"
-              errors={errors.PVS && errors.PVS.Date ? errors.PVS.Date : {}}
+              name="pvs.Date"
+              errors={errors.pvs && errors.pvs.Date ? errors.pvs.Date : {}}
               label={"Date Range Selection"}
             />
           </div>
           <div className="d-flex flex-column">
-            {!allTime && (
+            {!all_time && (
               <TimeRangeField
                 control={control}
-                name="PVS.Time"
-                errors={errors.PVS && errors.PVS.Time ? errors.PVS.Time : {}}
+                name="pvs.Time"
+                errors={errors.pvs && errors.pvs.Time ? errors.pvs.Time : {}}
                 label={"Time Range Selection"}
-                disabled={allTime}
+                disabled={all_time}
               />
             )}
             <SwitchField
               control={control}
-              name="PVS.AllTime"
+              name="pvs.all_time"
               label="All the time"
             />
           </div>

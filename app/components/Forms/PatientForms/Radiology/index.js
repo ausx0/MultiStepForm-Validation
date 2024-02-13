@@ -8,7 +8,7 @@ import TimeRangeField from "@/app/components/AddReportFields/TimeRangeField";
 import SwitchField from "@/app/components/AddReportFields/SwitchField";
 
 const RadiologyForm = ({ control, errors, watch }) => {
-  const allTime = watch("Radiology.AllTime");
+  const all_time = watch("radiology.all_time");
 
   return (
     <>
@@ -16,7 +16,7 @@ const RadiologyForm = ({ control, errors, watch }) => {
         <span style={{ color: "#09131973" }}>
           In here you can select details
         </span>
-        <h5 style={{ fontWeight: "bold", color: "#2E5D7D" }}>Radiology</h5>
+        <h5 style={{ fontWeight: "bold", color: "#2E5D7D" }}>radiology</h5>
       </div>
 
       <div className="d-flex w-100 justify-content-center">
@@ -24,32 +24,32 @@ const RadiologyForm = ({ control, errors, watch }) => {
           <div className="d-flex flex-column">
             <DateRangeInput
               control={control}
-              name="Radiology.Date"
+              name="radiology.Date"
               errors={
-                errors.Radiology && errors.Radiology.Date
-                  ? errors.Radiology.Date
+                errors.radiology && errors.radiology.Date
+                  ? errors.radiology.Date
                   : {}
               }
               label={"Date Range Selection"}
             />
           </div>
           <div className="d-flex flex-column">
-            {!allTime && (
+            {!all_time && (
               <TimeRangeField
                 control={control}
-                name="Radiology.Time"
+                name="radiology.Time"
                 errors={
-                  errors.Radiology && errors.Radiology.Time
-                    ? errors.Radiology.Time
+                  errors.radiology && errors.radiology.Time
+                    ? errors.radiology.Time
                     : {}
                 }
                 label={"Time Range Selection"}
-                disabled={allTime}
+                disabled={all_time}
               />
             )}
             <SwitchField
               control={control}
-              name="Radiology.AllTime"
+              name="radiology.all_time"
               label="All the time"
             />
           </div>

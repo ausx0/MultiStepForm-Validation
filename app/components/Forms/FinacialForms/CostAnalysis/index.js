@@ -8,7 +8,7 @@ import TimeRangeField from "@/app/components/AddReportFields/TimeRangeField";
 import SwitchField from "@/app/components/AddReportFields/SwitchField";
 
 const CostAnalysisForm = ({ control, errors, watch }) => {
-  const allTime = watch("CostAnalysis.AllTime");
+  const all_time = watch("cost_analysis.all_time");
 
   return (
     <>
@@ -24,7 +24,7 @@ const CostAnalysisForm = ({ control, errors, watch }) => {
           <div className="d-flex flex-column">
             <label className="form-label">Select persons</label>
             <Controller
-              name="CostAnalysis.Persons"
+              name="cost_analysis.persons"
               control={control}
               render={({ field }) => (
                 <SelectField
@@ -38,7 +38,7 @@ const CostAnalysisForm = ({ control, errors, watch }) => {
           <div className="d-flex flex-column">
             <label className="form-label">Select Items</label>
             <Controller
-              name="CostAnalysis.Items"
+              name="cost_analysis.items"
               control={control}
               render={({ field }) => (
                 <SelectField
@@ -52,32 +52,32 @@ const CostAnalysisForm = ({ control, errors, watch }) => {
           <div className="d-flex flex-column">
             <DateRangeInput
               control={control}
-              name="CostAnalysis.Date"
+              name="cost_analysis.Date"
               errors={
-                errors.CostAnalysis && errors.CostAnalysis.Date
-                  ? errors.CostAnalysis.Date
+                errors.cost_analysis && errors.cost_analysis.Date
+                  ? errors.cost_analysis.Date
                   : {}
               }
               label={"Date Range Selection"}
             />
           </div>
           <div className="d-flex flex-column">
-            {!allTime && (
+            {!all_time && (
               <TimeRangeField
                 control={control}
-                name="CostAnalysis.Time"
+                name="cost_analysis.Time"
                 errors={
-                  errors.CostAnalysis && errors.CostAnalysis.Time
-                    ? errors.CostAnalysis.Time
+                  errors.cost_analysis && errors.cost_analysis.Time
+                    ? errors.cost_analysis.Time
                     : {}
                 }
                 label={"Time Range Selection"}
-                disabled={allTime}
+                disabled={all_time}
               />
             )}
             <SwitchField
               control={control}
-              name="CostAnalysis.AllTime"
+              name="cost_analysis.all_time"
               label="All the time"
             />
           </div>

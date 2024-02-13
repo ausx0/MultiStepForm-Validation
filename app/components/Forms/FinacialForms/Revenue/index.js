@@ -12,14 +12,14 @@ import TimeRangeField from "@/app/components/AddReportFields/TimeRangeField";
 import DateRangeInput from "@/app/components/AddReportFields/DateRangeField";
 
 const RevenueForm = ({ control, errors, watch }) => {
-  const allTime = watch("Revenue.AllTime");
+  const all_time = watch("revenue.all_time");
   return (
     <>
       <div className="d-flex w-100 justify-content-between align-items-center">
         <span style={{ color: "#09131973" }}>
           In here you can select details
         </span>
-        <h5 style={{ fontWeight: "bold", color: "#2E5D7D" }}>Revenue</h5>
+        <h5 style={{ fontWeight: "bold", color: "#2E5D7D" }}>revenue</h5>
       </div>
 
       <div className="d-flex w-100 justify-content-center">
@@ -27,7 +27,7 @@ const RevenueForm = ({ control, errors, watch }) => {
           <div className="d-flex flex-column">
             <label className="form-label">Select Patient</label>
             <Controller
-              name="Revenue.Patient"
+              name="revenue.patient"
               control={control}
               render={({ field }) => (
                 <SelectField
@@ -39,9 +39,9 @@ const RevenueForm = ({ control, errors, watch }) => {
             />
           </div>
           <div className="d-flex flex-column">
-            <label className="form-label">Province</label>
+            <label className="form-label">province</label>
             <Controller
-              name="Revenue.Province"
+              name="revenue.province"
               control={control}
               render={({ field }) => (
                 <SelectField
@@ -56,7 +56,7 @@ const RevenueForm = ({ control, errors, watch }) => {
             <RadioInput
               control={control}
               label="Select Gender"
-              name="Revenue.SelectGender"
+              name="revenue.select_gender"
               errors={errors}
               options={[
                 { label: "Male", value: "male", icon: <MaleIcon /> },
@@ -73,30 +73,30 @@ const RevenueForm = ({ control, errors, watch }) => {
           <div className="d-flex flex-column">
             <DateRangeInput
               control={control}
-              name="Revenue.Date"
+              name="revenue.Date"
               errors={
-                errors.Revenue && errors.Revenue.Date ? errors.Revenue.Date : {}
+                errors.revenue && errors.revenue.Date ? errors.revenue.Date : {}
               }
               label={"Date Range Selection"}
             />
           </div>
           <div className="d-flex flex-column">
-            {!allTime && (
+            {!all_time && (
               <TimeRangeField
                 control={control}
-                name="Revenue.Time"
+                name="revenue.Time"
                 errors={
-                  errors.Revenue && errors.Revenue.Time
-                    ? errors.Revenue.Time
+                  errors.revenue && errors.revenue.Time
+                    ? errors.revenue.Time
                     : {}
                 }
                 label={"Time Range Selection"}
-                disabled={allTime}
+                disabled={all_time}
               />
             )}
             <SwitchField
               control={control}
-              name="Revenue.AllTime"
+              name="revenue.all_time"
               label="All the time"
             />
           </div>

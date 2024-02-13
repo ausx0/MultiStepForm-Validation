@@ -9,7 +9,7 @@ import SwitchField from "@/app/components/AddReportFields/SwitchField";
 import { RadioInput } from "@/app/components/AddReportFields/RadioField";
 
 const TreatmentAndProcedureForm = ({ control, errors, watch }) => {
-  const allTime = watch("TAP.AllTime");
+  const all_time = watch("tab.all_time");
 
   return (
     <>
@@ -30,7 +30,7 @@ const TreatmentAndProcedureForm = ({ control, errors, watch }) => {
               control={control}
               defaultValue="treatment" // pass the default value here
               errors={errors} // pass the errors object directly
-              name="TAP.RadioButton"
+              name="tab.radio_button"
               options={[
                 { label: "Treatment", value: "treatment" },
                 {
@@ -43,24 +43,24 @@ const TreatmentAndProcedureForm = ({ control, errors, watch }) => {
           <div className="d-flex flex-column">
             <DateRangeInput
               control={control}
-              name="TAP.Date"
-              errors={errors.TAP ? errors.TAP.Date : {}}
+              name="tab.Date"
+              errors={errors.tab ? errors.tab.Date : {}}
               label={"Date Range Selection"}
             />
           </div>
-          {!allTime && (
+          {!all_time && (
             <div className="d-flex flex-column">
               <TimeRangeField
                 control={control}
-                name="TAP.Time"
-                errors={errors.TAP && errors.TAP.Time ? errors.TAP.Time : {}}
+                name="tab.Time"
+                errors={errors.tab && errors.tab.Time ? errors.tab.Time : {}}
                 label={"Time Range Selection"}
               />
             </div>
           )}
           <SwitchField
             control={control}
-            name="TAP.AllTime"
+            name="tab.all_time"
             label="All the time"
           />
         </div>

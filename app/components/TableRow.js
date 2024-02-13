@@ -16,7 +16,7 @@ const TableRow = (props) => {
         >
           {columns.map((column, columnIndex) => (
             <TableRowCell
-              key={column.key}
+              key={`${column.key}-${itemIndex}`}
               item={item}
               column={column}
               columnIndex={columnIndex}

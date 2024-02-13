@@ -4,14 +4,7 @@ const TableRowCell = (props) => {
   const { item, column, columnIndex, totalColumns } = props;
   const value = item[column.key];
   return (
-    <td
-      className=" text-muted custom-font-size"
-      style={
-        {
-          // padding: "10px",
-        }
-      }
-    >
+    <td className=" text-muted custom-font-size" style={{}}>
       <div
         className="d-flex align-items-center"
         style={{

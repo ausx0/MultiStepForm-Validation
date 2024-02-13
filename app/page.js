@@ -14,6 +14,9 @@ import PlusInCircleIcon from "./components/assets/PlusInCircleIcon";
 import CirclePlusIcon from "./components/assets/PlusInCircleIcon";
 import DeleteAction from "./components/DeleteAction";
 import AddReportModal from "./components/AddReportModal";
+import ViewAction from "./components/ViewAction";
+import { downloadPDF } from "./components/PDF/PDFFile";
+import ExportAction from "./components/ExportAction";
 
 const columns = [
   {
@@ -49,27 +52,9 @@ const columns = [
     render: () => (
       <>
         <div className="d-flex justify-content-center align-items-center gap-4">
-          <StyledButton
-            style={{
-              background: "#7493A8",
-              color: "#fff",
-              border: "none",
-            }}
-            variant={"actions"}
-          >
-            View
-          </StyledButton>
+          <ViewAction />
 
-          <StyledButton
-            style={{
-              background: "#E0BB1F",
-              color: "#fff",
-              border: "none",
-            }}
-            variant={"actions"}
-          >
-            Export
-          </StyledButton>
+          <ExportAction />
           <DeleteAction />
         </div>
       </>

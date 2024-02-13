@@ -7,7 +7,7 @@ const DateRangeInput = ({ control, label, name, errors }) => (
     <label className="form-label">{label}</label>
     <div className="d-flex input-group">
       <Controller
-        name={`${name}.startDate`}
+        name={`${name}.start_date`}
         control={control}
         defaultValue=""
         render={({ field }) => (
@@ -23,7 +23,7 @@ const DateRangeInput = ({ control, label, name, errors }) => (
         <ArrowRightIcon />
       </span>
       <Controller
-        name={`${name}.endDate`}
+        name={`${name}.end_date`}
         control={control}
         defaultValue=""
         render={({ field }) => (
@@ -37,11 +37,11 @@ const DateRangeInput = ({ control, label, name, errors }) => (
       />
     </div>
 
-    {errors && errors.startDate && (
-      <p style={{ color: "red" }}>{errors.startDate.message}</p>
+    {errors && errors.start_date && (
+      <p style={{ color: "red" }}>{errors.start_date.message}</p>
     )}
-    {errors && errors.endDate && (
-      <p style={{ color: "red" }}>{errors.endDate.message}</p>
+    {errors && errors.end_date && (
+      <p style={{ color: "red" }}>{errors.end_date.message}</p>
     )}
   </div>
 );

@@ -22,7 +22,7 @@ const DemographicForm = ({ control, errors }) => {
           <div className="d-flex flex-column">
             <label className="form-label">Material Status</label>
             <Controller
-              name="Demographics.MaterialStatus"
+              name="demographics.material_status"
               control={control}
               render={({ field }) => (
                 <SelectField
@@ -34,9 +34,9 @@ const DemographicForm = ({ control, errors }) => {
             />
           </div>
           <div className="d-flex flex-column">
-            <label className="form-label">Province</label>
+            <label className="form-label">province</label>
             <Controller
-              name="Demographics.Province"
+              name="demographics.province"
               control={control}
               render={({ field }) => (
                 <SelectField
@@ -52,7 +52,7 @@ const DemographicForm = ({ control, errors }) => {
               label="Select Gender"
               errors={errors}
               control={control}
-              name="Demographics.SelectGender"
+              name="demographics.select_gender"
               options={[
                 { label: "Male", value: "male", icon: <MaleIcon /> },
                 {
@@ -71,7 +71,7 @@ const DemographicForm = ({ control, errors }) => {
               label="Have Children"
               control={control}
               errors={errors}
-              name="Demographics.HaveChildren"
+              name="demographics.have_children"
               options={[
                 { label: "Yes", value: "yes" },
                 {

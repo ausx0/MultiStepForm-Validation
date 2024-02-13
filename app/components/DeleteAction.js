@@ -4,6 +4,8 @@ import "rsuite/dist/rsuite.min.css";
 import StyledButton from "./ui/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { downloadPDF } from "../Store/PdfSlice";
+import { useDispatch } from "react-redux";
 
 export default function DeleteAction() {
   const [open, setOpen] = useState(false);
@@ -15,6 +17,7 @@ export default function DeleteAction() {
     setTimeout(() => setRows(10), 1000);
   };
 
+  const dispatch = useDispatch();
   return (
     <>
       <button
@@ -42,7 +45,11 @@ export default function DeleteAction() {
         </Modal.Header>
         <Modal.Body>Are You Sure Want Delete This ?</Modal.Body>
         <Modal.Footer>
-          <Button onClick={handleClose} appearance="primary" color="red ">
+          <Button
+            onClick={() => dispatch(downloadPDF())}
+            appearance="primary"
+            color="red"
+          >
             Ok
           </Button>
           <Button onClick={handleClose} appearance="subtle">

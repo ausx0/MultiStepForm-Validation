@@ -8,7 +8,7 @@ import TimeRangeField from "@/app/components/AddReportFields/TimeRangeField";
 import SwitchField from "@/app/components/AddReportFields/SwitchField";
 
 const UtilizationForm = ({ control, errors, watch }) => {
-  const allTime = watch("Utilization.AllTime");
+  const all_time = watch("utilization.all_time");
 
   return (
     <>
@@ -24,7 +24,7 @@ const UtilizationForm = ({ control, errors, watch }) => {
           <div className="d-flex flex-column">
             <label className="form-label">Select items</label>
             <Controller
-              name="Utilization.Items"
+              name="utilization.items"
               control={control}
               render={({ field }) => (
                 <SelectField
@@ -38,32 +38,32 @@ const UtilizationForm = ({ control, errors, watch }) => {
           <div className="d-flex flex-column">
             <DateRangeInput
               control={control}
-              name="Utilization.Date"
+              name="utilization.Date"
               errors={
-                errors.Utilization && errors.Utilization.Date
-                  ? errors.Utilization.Date
+                errors.utilization && errors.utilization.Date
+                  ? errors.utilization.Date
                   : {}
               }
               label={"Date Range Selection"}
             />
           </div>
           <div className="d-flex flex-column">
-            {!allTime && (
+            {!all_time && (
               <TimeRangeField
                 control={control}
-                name="Utilization.Time"
+                name="utilization.Time"
                 errors={
-                  errors.Utilization && errors.Utilization.Time
-                    ? errors.Utilization.Time
+                  errors.utilization && errors.utilization.Time
+                    ? errors.utilization.Time
                     : {}
                 }
                 label={"Time Range Selection"}
-                disabled={allTime}
+                disabled={all_time}
               />
             )}
             <SwitchField
               control={control}
-              name="Utilization.AllTime"
+              name="utilization.all_time"
               label="All the time"
             />
           </div>
